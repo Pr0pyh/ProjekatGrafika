@@ -13,6 +13,9 @@ int main()
     Game game;
     GLFWwindow* window = game.Initialize(windowWidth, windowHeight, "projekat");
 
+    game.shaderInitialization();
+    game.arrayAndBufferInitialization();
+
     while(!glfwWindowShouldClose(window))
     {
         game.Input(window);
