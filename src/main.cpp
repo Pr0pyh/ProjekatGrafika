@@ -15,11 +15,12 @@ int main()
 
     game.shaderInitialization();
     game.arrayAndBufferInitialization();
+    game.textureInitialization();
 
     while(!glfwWindowShouldClose(window))
     {
         game.Input(window);
-
+        game.Update();
         game.Draw(window);
     }
 
