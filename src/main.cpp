@@ -14,8 +14,9 @@ int main()
     GLFWwindow* window = game.Initialize(windowWidth, windowHeight, "projekat");
 
     game.shaderInitialization();
-    game.arrayAndBufferInitialization();
-    game.textureInitialization();
+//    game.arrayAndBufferInitialization();
+//    game.textureInitialization();
+    game.modelInitialization();
 
     while(!glfwWindowShouldClose(window))
     {
