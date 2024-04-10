@@ -9,8 +9,16 @@
 #include <stb_image.h>
 
 #include <MojeKlase/Shader.h>
+#include <MojeKlase/Camera.h>
 
 #include <iostream>
+
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+float lastX;
+float lastY;
+bool firstMouse = true;
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 class Game {
 private:
@@ -21,6 +29,25 @@ private:
     static void framebuffer_size_callback(GLFWwindow* window, const int width, const int height)
     {
         glViewport(0, 0, width, height);
+    }
+    static void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
+    {
+        float xpos = static_cast<float>(xposIn);
+        float ypos = static_cast<float>(yposIn);
+
+        if(firstMouse)
+        {
+            lastX = xpos;
+            lastY = ypos;
+            firstMouse = false;
+        }
+
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos;
+        lastX = xpos;
+        lastY = ypos;
+
+        camera.processMouseMovement(xoffset, yoffset);
     }
 public:
     Game(){}
@@ -41,12 +68,18 @@ public:
         }
         glfwMakeContextCurrent(window);
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+        glfwSetCursorPosCallback(window, mouse_callback);
+
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
         if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
             std::cout << "failed to initialize GLAD" << std::endl;
             return NULL;
         }
+
+        lastX = windowWidth/2.0f;
+        lastY = windowHeight/2.0f;
 
         return window;
     }
@@ -174,14 +207,27 @@ public:
     {
         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
+
+        if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+            camera.processKeyboard(FORWARD, deltaTime);
+        if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+            camera.processKeyboard(BACKWARD, deltaTime);
+        if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+            camera.processKeyboard(LEFT, deltaTime);
+        if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+            camera.processKeyboard(RIGHT, deltaTime);
     }
 
     void Update()
     {
+        float currentFrame = static_cast<float>(glfwGetTime());
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
         glm::mat4 view = glm::mat4(1.0f);
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        view = camera.GetViewmatrix();
         glm::mat4 projection;
         projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
 
