@@ -43,7 +43,7 @@ include_directories(${CMAKE_BINARY_DIR}/configuration)
 
 include_directories(include/)
 add_executable(${PROJECT_NAME}
-        ${SOURCES} include/MojeKlase/Game.h include/MojeKlase/Shader.h include/MojeKlase/Camera.h)
+        ${SOURCES} include/MojeKlase/Game.h include/MojeKlase/Shader.h include/MojeKlase/Camera.h include/MojeKlase/Mesh.h include/MojeKlase/Model.h)
 
 target_link_libraries(${PROJECT_NAME} ${LIBS})
 
