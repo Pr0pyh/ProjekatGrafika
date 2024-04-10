@@ -127,5 +127,7 @@ void main()
     result += calcPointLight(pointLight, norm, FragPos, viewDir);
     result += calcSpotLight(spotLight, norm, FragPos, viewDir);
 
-    FragColor = vec4(result, 1.0f);
+    vec3 opacityTexture = vec3(texture(material.texture_opacity1, TexCoord));
+    float opacityFactor = (opacityTexture.r + opacityTexture.g + opacityTexture.b)*0.333;
+    FragColor = vec4(result, opacityFactor);
 }

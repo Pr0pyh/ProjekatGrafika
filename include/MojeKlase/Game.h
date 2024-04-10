@@ -268,6 +268,10 @@ public:
     void Draw(GLFWwindow* window)
     {
         glEnable(GL_DEPTH_TEST);
+        //blending
+        glEnable(GL_BLEND);
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+        glBlendEquation(GL_FUNC_ADD);
 
         glClearColor(0.1f, 0.5f, 0.8f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
