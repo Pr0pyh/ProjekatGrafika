@@ -214,7 +214,7 @@ public:
             camera.processKeyboard(RIGHT, deltaTime);
 
         if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-            snapshotPosition = camera.Position;
+            snapshotPosition = camera.Front;
     }
 
     void Update()
@@ -237,7 +237,7 @@ public:
         shader->setVec3("dirLight.diffuse", 0.7f, 0.42f, 0.26f);
         shader->setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
 
-        shader->setVec3("pointLights.position", glm::vec3(0.0f, 1.0f, 0.0f));
+        shader->setVec3("pointLights.position", glm::vec3( 0.7f,  0.2f,  2.0f));
         shader->setVec3("pointLights.ambient", 0.05f, 0.05f, 0.05f);
         shader->setVec3("pointLights.diffuse", 0.8f, 0.8f, 0.8f);
         shader->setVec3("pointLights.specular", 1.0f, 1.0f, 1.0f);

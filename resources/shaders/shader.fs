@@ -49,6 +49,7 @@ struct SpotLight {
 in vec2 TexCoord;
 in vec3 Normal;
 in vec3 FragPos;
+in mat3 tbnMatrix;
 
 uniform Material material;
 uniform DirLight dirLight;
@@ -108,20 +109,23 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     ambient *= attenuation * intensity;
     diffuse *= attenuation * intensity;
     specular *= attenuation * intensity;
-    return ambient + diffuse + specular;
+    return (ambient + diffuse + specular);
 }
 
 void main()
 {
     vec3 snapshotNormal = normalize(Normal);
+    vec3 norm = texture(material.texture_normal1, TexCoord).rgb;
+    norm = normalize(norm*2.0-1.0);
+    norm = normalize(tbnMatrix*norm);
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 cameraDir = normalize(-cameraPos);
     if(dot(snapshotNormal, cameraDir) < 0.0)
         discard;
 
-    vec3 result = calcDirLight(dirLight, snapshotNormal, viewDir);
-    result += calcPointLight(pointLight, snapshotNormal, FragPos, viewDir);
-    result += calcSpotLight(spotLight, snapshotNormal, FragPos, viewDir);
+    vec3 result = calcDirLight(dirLight, norm, viewDir);
+    result += calcPointLight(pointLight, norm, FragPos, viewDir);
+    result += calcSpotLight(spotLight, norm, FragPos, viewDir);
 
     FragColor = vec4(result, 1.0f);
 }
