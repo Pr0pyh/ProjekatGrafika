@@ -237,6 +237,25 @@ public:
         shader->setVec3("dirLight.diffuse", 0.7f, 0.42f, 0.26f);
         shader->setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
 
+        shader->setVec3("pointLights.position", glm::vec3(0.0f, 1.0f, 0.0f));
+        shader->setVec3("pointLights.ambient", 0.05f, 0.05f, 0.05f);
+        shader->setVec3("pointLights.diffuse", 0.8f, 0.8f, 0.8f);
+        shader->setVec3("pointLights.specular", 1.0f, 1.0f, 1.0f);
+        shader->setFloat("pointLights.constant", 1.0f);
+        shader->setFloat("pointLights.linear", 0.09f);
+        shader->setFloat("pointLights.quadratic", 0.032f);
+
+        shader->setVec3("spotLight.position", camera.Position);
+        shader->setVec3("spotLight.direction", camera.Front);
+        shader->setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
+        shader->setVec3("spotLight.diffuse", 0.8f, 0.8f, 0.0f);
+        shader->setVec3("spotLight.specular", 0.8f, 0.8f, 0.0f);
+        shader->setFloat("spotLight.constant", 1.0f);
+        shader->setFloat("spotLight.linear", 0.09f);
+        shader->setFloat("spotLight.quadratic", 0.032f);
+        shader->setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+        shader->setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
+
         shader->setVec3("cameraPos", snapshotPosition);
         shader->setVec3("viewPos", camera.Position);
 
