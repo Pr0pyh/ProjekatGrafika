@@ -17,10 +17,13 @@ int main()
 //    game.arrayAndBufferInitialization();
 //    game.textureInitialization();
     game.modelInitialization();
+    game.skyboxInitialization();
 
     while(!glfwWindowShouldClose(window))
     {
+        game.ScreenSettings();
         game.Input(window);
+        game.DrawSkybox();
         game.Update();
         game.Draw(window);
     }
