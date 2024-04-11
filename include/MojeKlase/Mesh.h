@@ -40,7 +40,7 @@ public:
         setupMesh();
     }
 
-    void Draw(Shader &shader)
+    void Draw(Shader* shader)
     {
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
@@ -63,10 +63,9 @@ public:
             else if(name == "texture_opacity")
                 number = std::to_string(opacityNr++);
 
-            shader.setInt(("material." + name + number).c_str(), i);
+            shader->setInt(("material." + name + number).c_str(), i);
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }
-        glActiveTexture(GL_TEXTURE0);
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);

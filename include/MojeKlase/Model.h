@@ -22,7 +22,7 @@ public:
     {
         loadModel(path);
     }
-    void Draw(Shader &shader)
+    void Draw(Shader* shader)
     {
         for(unsigned int i = 0; i<meshes.size(); i++)
             meshes[i].Draw(shader);
@@ -169,6 +169,7 @@ unsigned int TextureFromFile(const char* path, const std::string& directory, boo
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
+    std::cout << filename << std::endl;
     int width, height, nrComponents;
     unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     stbi_set_flip_vertically_on_load(true);

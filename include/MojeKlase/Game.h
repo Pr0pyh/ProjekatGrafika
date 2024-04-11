@@ -21,6 +21,12 @@ float lastY;
 bool firstMouse = true;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 glm::vec3 snapshotPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 pointLightPositions[] = {
+        glm::vec3( 0.7f,  0.2f,  2.0f),
+        glm::vec3( 2.3f, -3.3f, -4.0f),
+        glm::vec3(-4.0f,  2.0f, -12.0f),
+        glm::vec3( 0.0f,  0.0f, -3.0f)
+};
 
 class Game {
 private:
@@ -228,22 +234,53 @@ public:
         glm::mat4 projection;
         projection = glm::perspective(glm::radians(45.0f), 800.0f/600.0f, 0.1f, 100.0f);
 
+
         shader->use();
         shader->setMat4("view", view);
         shader->setMat4("projection", projection);
+
+        shader->setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        shader->setInt("material.diffuse", 0);
+        shader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        shader->setFloat("material.shininess", 32.0f);
 
         shader->setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
         shader->setVec3("dirLight.ambient", 0.3f, 0.24f, 0.14f);
         shader->setVec3("dirLight.diffuse", 0.7f, 0.42f, 0.26f);
         shader->setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
 
-        shader->setVec3("pointLights.position", glm::vec3( 0.7f,  0.2f,  2.0f));
-        shader->setVec3("pointLights.ambient", 0.05f, 0.05f, 0.05f);
-        shader->setVec3("pointLights.diffuse", 0.8f, 0.8f, 0.8f);
-        shader->setVec3("pointLights.specular", 1.0f, 1.0f, 1.0f);
-        shader->setFloat("pointLights.constant", 1.0f);
-        shader->setFloat("pointLights.linear", 0.09f);
-        shader->setFloat("pointLights.quadratic", 0.032f);
+        // point light 1
+        shader->setVec3("pointLights[0].position", pointLightPositions[0]);
+        shader->setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
+        shader->setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
+        shader->setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
+        shader->setFloat("pointLights[0].constant", 1.0f);
+        shader->setFloat("pointLights[0].linear", 0.09f);
+        shader->setFloat("pointLights[0].quadratic", 0.032f);
+        // point light 2
+        shader->setVec3("pointLights[1].position", pointLightPositions[1]);
+        shader->setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
+        shader->setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
+        shader->setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
+        shader->setFloat("pointLights[1].constant", 1.0f);
+        shader->setFloat("pointLights[1].linear", 0.09f);
+        shader->setFloat("pointLights[1].quadratic", 0.032f);
+        // point light 3
+        shader->setVec3("pointLights[2].position", pointLightPositions[2]);
+        shader->setVec3("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
+        shader->setVec3("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
+        shader->setVec3("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
+        shader->setFloat("pointLights[2].constant", 1.0f);
+        shader->setFloat("pointLights[2].linear", 0.09f);
+        shader->setFloat("pointLights[2].quadratic", 0.032f);
+        // point light 4
+        shader->setVec3("pointLights[3].position", pointLightPositions[3]);
+        shader->setVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
+        shader->setVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
+        shader->setVec3("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
+        shader->setFloat("pointLights[3].constant", 1.0f);
+        shader->setFloat("pointLights[3].linear", 0.09f);
+        shader->setFloat("pointLights[3].quadratic", 0.032f);
 
         shader->setVec3("spotLight.position", camera.Position);
         shader->setVec3("spotLight.direction", camera.Front);
@@ -276,8 +313,12 @@ public:
         glClearColor(0.1f, 0.5f, 0.8f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        //face culling
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+
         shader->use();
-        room->Draw(*shader);
+        room->Draw(shader);
 //        glBindVertexArray(VAO);
 //        glDrawArrays(GL_TRIANGLES, 0, 36);
 

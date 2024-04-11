@@ -33,7 +33,7 @@ public:
 
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH)
     {
-        Front = glm::vec3(0.0f, 0.0f, 1.0f);
+        Front = glm::vec3(0.0f, 0.0f, -1.0f);
         MovementSpeed = SPEED;
         MouseSensitivity = SENSITIVITY;
         Position = position;
@@ -59,7 +59,7 @@ public:
             Position -= Right * velocity;
         if(direction == RIGHT)
             Position += Right * velocity;
-        Position.y = 1.0f;
+//        Position.y = 1.0f;
     }
 
     void processMouseMovement(float xoffset, float yoffset)
