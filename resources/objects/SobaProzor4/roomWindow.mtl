@@ -1,0 +1,103 @@
+# Blender 4.1.0 MTL File: 'roomWindow.blend'
+# www.blender.org
+
+newmtl MI_Plastic_Chair_01.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Material.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+illum 1
+map_Kd Wall_Plaster_001_basecolor.jpg
+map_Ns Wall_Plaster_001_roughness.jpg
+map_d Wall_Plaster_001_opacity.jpg
+map_Bump -bm 1.000000 Wall_Plaster_001_normal.jpg
+disp -w Wall_Plaster_001_height.png
+
+newmtl Material.002
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.200000
+d 1.000000
+illum 2
+map_Kd Substance_Graph_BaseColor(1).jpg
+map_Ns Substance_Graph_Roughness.jpg
+map_Bump -bm 1.000000 Substance_Graph_Normal(1).jpg
+disp -w Substance_Graph_Height.jpg
+
+newmtl ceiling
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Wood_Ceiling_001_basecolor.jpg
+map_d Wood_Ceiling_001_opacity.jpg
+map_Bump -bm 1.000000 Wood_Ceiling_001_normal.jpg
+
+newmtl lampa1
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Glass_Window_003_basecolor.jpg
+map_d Glass_Window_003_opacity.jpg
+map_Bump -bm 1.000000 Glass_Window_003_normal.jpg
+
+newmtl lampa2
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Metal_006_basecolor.jpg
+map_d Wall_Plaster_001_opacity.jpg
+map_Bump -bm 1.000000 Metal_006_normal.jpg
+
+newmtl old_wooden_table
+Ns 20.000006
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd owt_diffuse.png
+map_d owt_opacity.png
+map_Bump -bm 0.040000 owt_bump.png
+disp -w owt_bump.png
+
+newmtl staklo
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 2
+map_Kd Wood_Window_001_basecolor.jpg
+map_Ks Wood_Window_001_metallic.jpg
+map_d Wood_Window_001_opacity.jpg
+map_Bump -bm 1.000000 Wood_Window_001_normal.jpg
+disp -w Wood_Window_001_height.png

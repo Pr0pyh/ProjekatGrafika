@@ -308,7 +308,7 @@ public:
 
     void modelInitialization()
     {
-        room = new Model("resources/objects/SobaProzor3/roomWindow.obj");
+        room = new Model("resources/objects/SobaProzor4/roomWindow.obj");
     }
 
     void Input(GLFWwindow* window)
