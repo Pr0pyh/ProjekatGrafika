@@ -22,10 +22,10 @@ bool firstMouse = true;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 glm::vec3 snapshotPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 pointLightPositions[] = {
-        glm::vec3( 0.7f,  0.2f,  2.0f),
+        glm::vec3( 0.0f,  2.0f,  0.0f),
         glm::vec3( 2.3f, -3.3f, -4.0f),
         glm::vec3(-4.0f,  2.0f, -12.0f),
-        glm::vec3( 0.0f,  0.0f, -3.0f)
+        glm::vec3( 0.0f,  0.0f, -8.0f)
 };
 
 class Game {
@@ -33,6 +33,7 @@ private:
     Shader *shader;
     Shader *skyboxShader;
     Model *room;
+    Model *lamp;
     unsigned int texture0;
     unsigned int texture1;
     unsigned int skyboxTexture;
@@ -291,12 +292,12 @@ public:
 
         std::vector<std::string> faces
                 {
-                        "resources/textures/mySkybox/right.png",
-                        "resources/textures/mySkybox/left.png",
-                        "resources/textures/mySkybox/top.png",
-                        "resources/textures/mySkybox/bottom.png",
-                        "resources/textures/mySkybox/front.png",
-                        "resources/textures/mySkybox/back.png"
+                        "resources/textures/mySkybox2/right.png",
+                        "resources/textures/mySkybox2/left.png",
+                        "resources/textures/mySkybox2/top.png",
+                        "resources/textures/mySkybox2/bottom.png",
+                        "resources/textures/mySkybox2/front.png",
+                        "resources/textures/mySkybox2/back.png"
                 };
         skyboxTexture = loadSkyboxTexture(faces);
         skyboxShader->use();
@@ -305,7 +306,7 @@ public:
 
     void modelInitialization()
     {
-        room = new Model("resources/objects/SobaProzor2/roomWindow.obj");
+        room = new Model("resources/objects/SobaProzor3/roomWindow.obj");
     }
 
     void Input(GLFWwindow* window)
@@ -376,18 +377,18 @@ public:
         shader->setFloat("material.shininess", 32.0f);
 
         shader->setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
-        shader->setVec3("dirLight.ambient", 0.3f, 0.24f, 0.14f);
-        shader->setVec3("dirLight.diffuse", 0.7f, 0.42f, 0.26f);
-        shader->setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+        shader->setVec3("dirLight.ambient", 0.0f, 0.0f, 0.0f);
+        shader->setVec3("dirLight.diffuse", 0.05f, 0.05f, 0.05f);
+        shader->setVec3("dirLight.specular", 0.2f, 0.2f, 0.2f);
 
         // point light 1
         shader->setVec3("pointLights[0].position", pointLightPositions[0]);
-        shader->setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
-        shader->setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
-        shader->setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
+        shader->setVec3("pointLights[0].ambient", 0.1f, 0.06f, 0.0f);
+        shader->setVec3("pointLights[0].diffuse", 1.0f, 0.6f, 0.0f);
+        shader->setVec3("pointLights[0].specular", 1.0f, 0.6f, 0.0f);
         shader->setFloat("pointLights[0].constant", 1.0f);
-        shader->setFloat("pointLights[0].linear", 0.09f);
-        shader->setFloat("pointLights[0].quadratic", 0.032f);
+        shader->setFloat("pointLights[0].linear", 0.04f);
+        shader->setFloat("pointLights[0].quadratic", 0.003f);
         // point light 2
         shader->setVec3("pointLights[1].position", pointLightPositions[1]);
         shader->setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
@@ -401,7 +402,7 @@ public:
         shader->setVec3("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
         shader->setVec3("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
         shader->setVec3("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
-        shader->setFloat("pointLights[2].constant", 1.0f);
+        shader->setFloat("pointLights[2].constant", 3.0f);
         shader->setFloat("pointLights[2].linear", 0.09f);
         shader->setFloat("pointLights[2].quadratic", 0.032f);
         // point light 4

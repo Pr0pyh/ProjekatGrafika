@@ -136,7 +136,7 @@ void main()
   	    discard;
 
     vec3 result = CalcDirLight(dirLight, norm, viewDir, TexCoords);
-    for(int i = 0; i<NR_POINT_LIGHTS; i++)
+    for(int i = 0; i<1; i++)
     {
         result += calcPointLight(pointLights[i], norm, FragPos, viewDir, TexCoords);
     }
