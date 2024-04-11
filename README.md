@@ -14,3 +14,5 @@ Mouse - Pogled okolo
 E - SnapShot okoline
 
 Escape - Exit
+
+![alt text](https://github.com/Pr0pyh/ProjekatGrafika/blob/82becbdbf431859ba905a592243cde5a97bdcca3/Screenshot%20from%202024-04-11%2013-36-59.png)
