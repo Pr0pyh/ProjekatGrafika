@@ -394,8 +394,8 @@ public:
         // point light 2
         shader->setVec3("pointLights[1].position", pointLightPositions[1]);
         shader->setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
-        shader->setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
-        shader->setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
+        shader->setVec3("pointLights[1].diffuse", 1.0f, 0.6f, 0.0f);
+        shader->setVec3("pointLights[1].specular", 1.0f, 0.6f, 0.0f);
         shader->setFloat("pointLights[1].constant", 1.0f);
         shader->setFloat("pointLights[1].linear", 0.09f);
         shader->setFloat("pointLights[1].quadratic", 0.032f);

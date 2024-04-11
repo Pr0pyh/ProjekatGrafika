@@ -59,7 +59,7 @@ public:
             Position -= Right * velocity;
         if(direction == RIGHT)
             Position += Right * velocity;
-        Position.y = 0.5f;
+        Position.y = 0.8f;
     }
 
     void processMouseMovement(float xoffset, float yoffset)
