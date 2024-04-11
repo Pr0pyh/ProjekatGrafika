@@ -14,7 +14,7 @@ int main()
     GLFWwindow* window = game.Initialize(windowWidth, windowHeight, "projekat");
 
     game.shaderInitialization();
-//    game.arrayAndBufferInitialization();
+    game.arrayAndBufferInitialization();
 //    game.textureInitialization();
     game.modelInitialization();
     game.skyboxInitialization();

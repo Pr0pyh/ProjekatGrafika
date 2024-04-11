@@ -22,7 +22,7 @@ bool firstMouse = true;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 glm::vec3 snapshotPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 pointLightPositions[] = {
-        glm::vec3( 0.0f,  2.0f,  0.0f),
+        glm::vec3( 0.2f,  5.0f,  1.0f),
         glm::vec3( 2.3f, -3.3f, -4.0f),
         glm::vec3(-4.0f,  2.0f, -12.0f),
         glm::vec3( 0.0f,  0.0f, -8.0f)
@@ -32,6 +32,7 @@ class Game {
 private:
     Shader *shader;
     Shader *skyboxShader;
+    Shader *lightShader;
     Model *room;
     Model *lamp;
     unsigned int texture0;
@@ -128,6 +129,7 @@ public:
     void shaderInitialization() {
         shader = new Shader("resources/shaders/shader.vs", "resources/shaders/shader.fs");
         skyboxShader = new Shader("resources/shaders/skyboxShader.vs", "resources/shaders/skyboxShader.fs");
+        lightShader = new Shader("resources/shaders/lightShader.vs", "resources/shaders/lightShader.fs");
     }
 
     void arrayAndBufferInitialization() {
@@ -377,18 +379,18 @@ public:
         shader->setFloat("material.shininess", 32.0f);
 
         shader->setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
-        shader->setVec3("dirLight.ambient", 0.0f, 0.0f, 0.0f);
+        shader->setVec3("dirLight.ambient", 0.1f, 0.1f, 0.1f);
         shader->setVec3("dirLight.diffuse", 0.05f, 0.05f, 0.05f);
         shader->setVec3("dirLight.specular", 0.2f, 0.2f, 0.2f);
 
         // point light 1
         shader->setVec3("pointLights[0].position", pointLightPositions[0]);
-        shader->setVec3("pointLights[0].ambient", 0.1f, 0.06f, 0.0f);
+        shader->setVec3("pointLights[0].ambient", 0.0f, 0.0f, 0.0f);
         shader->setVec3("pointLights[0].diffuse", 1.0f, 0.6f, 0.0f);
         shader->setVec3("pointLights[0].specular", 1.0f, 0.6f, 0.0f);
         shader->setFloat("pointLights[0].constant", 1.0f);
-        shader->setFloat("pointLights[0].linear", 0.04f);
-        shader->setFloat("pointLights[0].quadratic", 0.003f);
+        shader->setFloat("pointLights[0].linear", 0.07f);
+        shader->setFloat("pointLights[0].quadratic", 0.017f);
         // point light 2
         shader->setVec3("pointLights[1].position", pointLightPositions[1]);
         shader->setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
@@ -432,6 +434,13 @@ public:
         model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
         model = glm::scale(model, glm::vec3(0.2f));
         shader->setMat4("model", model);
+
+        lightShader->use();
+        model = glm::translate(model, pointLightPositions[0]);
+        model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+        lightShader->setMat4("view", view);
+        lightShader->setMat4("projection", projection);
+        lightShader->setMat4("model", model);
     }
 
     void Draw(GLFWwindow* window)
@@ -442,8 +451,10 @@ public:
 
         shader->use();
         room->Draw(shader);
-//        glBindVertexArray(VAO);
-//        glDrawArrays(GL_TRIANGLES, 0, 36);
+        //lightShader
+        lightShader->use();
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
