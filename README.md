@@ -8,6 +8,9 @@ Projekat za kurs Racunarske Grafike gde se moze videti samo uslikani deo okoline
 
 # Kontrole
 WASD - Kretanje
+
 Mouse - Pogled okolo
+
 E - SnapShot okoline
+
 Escape - Exit
