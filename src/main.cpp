@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-const int windowWidth = 800;
-const int windowHeight = 600;
+const int windowWidth = 1980;
+const int windowHeight = 1485;
 
 int main()
 {

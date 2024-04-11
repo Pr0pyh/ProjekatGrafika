@@ -19,6 +19,7 @@ float lastFrame = 0.0f;
 float lastX;
 float lastY;
 bool firstMouse = true;
+bool mouseCaptured = true;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 glm::vec3 snapshotPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 pointLightPositions[] = {
@@ -315,6 +316,19 @@ public:
     {
         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
+        if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
+        {
+            if(mouseCaptured)
+            {
+                mouseCaptured = !mouseCaptured;
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            }
+            else
+            {
+                mouseCaptured = !mouseCaptured;
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            }
+        }
 
         if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
             camera.processKeyboard(FORWARD, deltaTime);
