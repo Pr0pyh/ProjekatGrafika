@@ -3,6 +3,7 @@ Projekat za kurs Racunarske Grafike gde se moze videti samo uslikani deo okoline
 
 # Lekcija implementirane
 Oblast A - Cubemaps
+
 Oblast B - Normal mapping, Parallax mapping
 
 # Uputstvo
